@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: team1-microservice-microservice
+        app: team1-microservice
         stack: frontend
         source: demo
-    name: team1-microservice-microservice
+    name: team1-microservice
     namespace: microservices
 spec:
     replicas: 3
     selector:
         matchLabels:
-            run: team1-microservice-microservice
+            run: team1-microservice
     template:
         metadata:
             labels:
-                app: team1-microservice-microservice
-                run: team1-microservice-microservice
+                app: team1-microservice
+                run: team1-microservice
                 source: demo
         spec:
             containers:
-                -   image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/team1-microservice-microservice
-                    name: team1-microservice-microservice
+                -   image: 702037529261.dkr.ecr.us-west-2.amazonaws.com/team1-microservice
+                    name: team1-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,13 +31,13 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: team1-microservice-microservice-service
-    name: team1-microservice-microservice-service
+        app: team1-microservice-service
+    name: team1-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: team1-microservice-microservice
+        app: team1-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -59,7 +59,7 @@ spec:
                 paths:
                     -   path: /team1-microservice(/|$)(.*)
                         backend:
-                            serviceName: team1-microservice-microservice-service
+                            serviceName: team1-microservice-service
                             servicePort: 30201
 
 
